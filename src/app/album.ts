@@ -15,3 +15,7 @@ export class List {
     ref: string;
     list: Array<string>;
 }
+
+export interface CallableAlbum {
+    (a: Album, b: Album): number;
+  }

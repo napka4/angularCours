@@ -7,7 +7,7 @@
 
         <h5 class="card-title" *ngIf="album">Nom de l'album : {{album.title}}</h5>
         <p class="card-text" *ngIf="album">Nom de l'artiste: {{album.name}}</p>
-        <a href="#" class="btn btn-primary">Play >> </a>
+        <a class="btn btn-primary" (click)="play(album)">Play >> </a>
         
         <ul class="list-group" *ngIf="albumSongs">
             <li class="list-group-item" *ngFor="let song of albumSongs.list">{{song}}</li>

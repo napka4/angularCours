@@ -1,8 +1,9 @@
+<app-search (onSearch)="mySearch($event)"></app-search>
 <h1>{{ titlePage }}</h1>
 
-<div class="row content">   
+<div class="row content">
   <div class="col-sm-4 video">
-        <app-album-details [album]="albumSelected"></app-album-details>
+        <app-album-details [album]="albumSelected" (onPlay)="playParent($event)"></app-album-details>
 </div>
   <div class="col-sm-8 music">
       <nav aria-label="Page navigation example">
@@ -27,7 +28,7 @@
       <button type="button" class="btn btn-lg btn-danger">You are in an anonymous mode.</button>
       <div class="card" *ngFor="let album of albums; let odd = odd; let even = even" (click)="onSelected(album)">
           <div class="card-header">
-              {{ album.name }}
+              {{ album.name }} <span *ngIf="status==album.ref">[play]</span>
           </div>
           <div class="card-body" [ngClass]="{'card-special':odd==true,'index':even==true}">
               <h5 class="card-title">{{ album.title }}</h5>

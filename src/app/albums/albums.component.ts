@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Album } from '../album';
-import { ALBUMS } from '../mock-albums';
+import { AlbumService } from '../album.service';
 
 @Component({
   selector: 'app-albums',
@@ -11,19 +11,31 @@ import { ALBUMS } from '../mock-albums';
 export class AlbumsComponent implements OnInit {
 
   titlePage: string = "Page Principale Albums Music";
-  albums: Album[] = ALBUMS; // variable accessible dans le template
+  albums: Album[] = [];
+  albumSelected : Album;
+  status: string = null; 
 
-  albumSelected : Album = null;
+  constructor(private albumService: AlbumService) {}
 
-  constructor() {}
+/*   playParent($event) {
+    console.log(event);
+    this.status = $event.ref;
+  } */
+  ngOnInit() {
+    //this.albums = this.albumService.getAlbums();
+    this.albums = this.albumService.order((a,b) => { return b.duration - a.duration}).limit(0,3).getAlbums();
+  }
 
   onSelected(album:Album) {
     //console.log(album);
     this.albumSelected = album;
-
   }
 
-  ngOnInit() {
+  playParent($event) {
+    this.status = $event.ref;
   }
 
+  mySearch($event) {
+   if ($event) this.albums = $event;
+  }
 }

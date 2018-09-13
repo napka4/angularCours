@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Album, List } from '../album';
-import { ALBUM_LISTS } from '../mock-albums';
- 
+import { AlbumService } from '../album.service';
+
+
 @Component({
   selector: 'app-album-details',
   templateUrl: './album-details.component.html',
@@ -11,20 +11,25 @@ import { ALBUM_LISTS } from '../mock-albums';
 export class AlbumDetailsComponent implements OnInit {
 
   @Input() album : Album;
-  albumList: List[] = ALBUM_LISTS;
-  albumSongs: List = null;
+
+  albumLists: List[] = [];
+  list: List;
+  songs:Array<string> = [];
+
+  @Output() onPlay: EventEmitter<Album> = new EventEmitter();
 
 
-  constructor() { }
+  constructor(private albumService: AlbumService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(){
 
     if(this.album){
-    this.albumSongs = this.albumList.find((list) => list.ref == this.album.ref)
+    this.list = this.albumService.getAlbumList(this.album.ref);
+    this.songs = this.list.list;
     }
   }
+
 
 }
