@@ -26,24 +26,26 @@
           </ul>
       </nav><!-- .pagination -->
       <button type="button" class="btn btn-lg btn-danger">You are in an anonymous mode.</button>
-      <div class="card" *ngFor="let album of albums; let odd = odd; let even = even" (click)="onSelected(album)">
-          <div class="card-header">
-              {{ album.name }} <span *ngIf="status==album.ref">[play]</span>
-          </div>
-          <div class="card-body" [ngClass]="{'card-special':odd==true,'index':even==true}">
-              <h5 class="card-title">{{ album.title }}</h5>
-              <p class="card-text">{{ album.description }}</p>
-              <div *ngIf="album.tags">
-                <span *ngFor="let tag of album.tags" class="badge badge-info m-1">{{tag}}</span>
-              </div>
-              <a class="btn btn-outline-dark" href="{{album.url}}" role="button">En voir +</a>
-
-              <img *ngIf="album.like" class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
-              <small *ngIf="album.like" class="like">{{ album.like }}</small>
-              <img class="glyph-icon" src="./assets/svg/si-glyph-timer.svg"/>
-              <small *ngIf="album.duration" class="duration">{{ album.duration }} min</small>
-          </div>
-      </div><!-- .card -->
+      <div class="card" *ngFor="let album of albums; let odd = odd; let even = even">
+            <div class="card-header">
+                {{ album.name }} <span *ngIf="status==album.ref">[play]</span>
+            </div>
+            <div class="card-body" [ngClass]="{'card-special':odd==true,'index':even==true}">
+                <h5 class="card-title">{{ album.title }}</h5>
+                <p class="card-text">{{ album.description }}</p>
+                <div *ngIf="album.tags">
+                  <span *ngFor="let tag of album.tags" class="badge badge-info m-1">{{tag}}</span>
+                </div>
+                <a class="btn btn-outline-dark" routerLink="/album/{{album.ref}}" active  role="button">En voir +</a>
+            
+                <img *ngIf="album.like" class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
+                <small *ngIf="album.like" class="like">{{ album.like }}</small>
+                <img class="glyph-icon" src="./assets/svg/si-glyph-timer.svg"/>
+                <small *ngIf="album.duration" class="duration">{{ album.duration }} min</small>
+                <a (click)="onSelected(album)" class="btn btn-outline-dark" disabled role="button">Details</a>
+            </div>
+            </div>
+<!-- .card -->
       <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
               <li class="page-item disabled">
