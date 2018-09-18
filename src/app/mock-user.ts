@@ -1,13 +1,7 @@
 
-import {Users} from './users';
+import { User } from "./user";
 
-export const USERS: Users[] = [
-    {
-      "email": "napka4@hotmail.com",
-      "password": "123456"
-    },
-    {
-      "email": "toto@tata.fr",
-      "password": "123456"
-    }
-  ];
+export const MockUsers: User[] = [
+    new User( 'test@test.com', '123', 'test' ),
+    new User('nanshee4@gmail.com', '123', 'alex')
+];

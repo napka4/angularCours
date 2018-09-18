@@ -1,24 +1,36 @@
 <div class="container-fuild principal">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">{{ title }}</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <ul class="navbar-nav mr-auto">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand">{{ title }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/albums">Home
+                    </a>
+                </li>
+                <li *ngIf="guard.isLoggedIn()==false; else elseAuth" class="nav-item active">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                        Se connecter
+                    </a>
+                </li>
+                <ng-template #elseAuth>
                     <li class="nav-item active">
-                        <a class="nav-link" routerLink="/albums">Home
+                        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                            Dashboard
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" routerLink="/login" routerLinkActive="active">
-                            Se connecter
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- à la place du sélecteur des albums -->
-        <router-outlet></router-outlet>
-    </div>
+                            <a class="nav-link" (click)="guard.logout()">
+                                logout
+                            </a>
+                        </li>
+                </ng-template>
+            </ul>
+        </div>
+    </nav>
+    <!-- à la place du sélecteur des albums -->
+    <router-outlet></router-outlet>
+</div>

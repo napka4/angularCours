@@ -8,8 +8,10 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
 import { SearchComponent } from './search/search.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { LoginComponent } from './login/login.component';
-import { AppRoutingModule } from './/app-routing.module';
-
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PaginateComponent } from './paginate/paginate.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,10 @@ import { AppRoutingModule } from './/app-routing.module';
     AlbumDetailsComponent,
     SearchComponent,
     AlbumDescriptionComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    PageNotFoundComponent,
+    PaginateComponent,
   ],
   imports: [
     BrowserModule,
