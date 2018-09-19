@@ -12,26 +12,21 @@ export class AuthService {
 
   constructor() { }
 
-  auth(email: string, password: string): string {
+  auth(email: string, password: string): boolean {
     let user = this.users.find(u => u.email === email && u.password === password);
 
     if (user) {
-      this._isAuth = user.name;
+      this._isAuth = user.name; // memoire le nom de la personne authentifiée
 
-      return user.name;
+      return true;
     }
 
-    return '';
+    return false;
   }
 
   // retourner le nom de l'utilisateur connecté
   get isAuth(): string { return this._isAuth; }
-
+  // assigner une valeur à la variable privé
   set isAuth(isAuth: string) { this._isAuth = isAuth; }
-
-  // méthode pour se déloguer
-  logout(): void {
-    this._isAuth = ''; // on remet la chaîne de caractères vide
-  }
 
 }

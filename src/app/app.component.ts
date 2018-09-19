@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
 import { GuardService } from './guard.service';
 
 @Component({

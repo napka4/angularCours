@@ -34,4 +34,3 @@ import { PaginateComponent } from './paginate/paginate.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

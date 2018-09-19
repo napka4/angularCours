@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     this.name = `Hello ${this.aS.isAuth} `;
 
     // Vous devez souscrire à cette méthode car c'est un Observable
+    // RxJS avec les Observables à revoir dans le prochain cours
     this.route.queryParamMap.subscribe(param => {
       this.message = param['params']
     });

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Album, List } from '../album';
+import { List, Album } from '../album';
 import { AlbumService } from '../album.service';
-
 
 @Component({
   selector: 'app-album-details',
@@ -10,26 +9,30 @@ import { AlbumService } from '../album.service';
 })
 export class AlbumDetailsComponent implements OnInit {
 
-  @Input() album : Album;
+  @Input() album: Album; // propriété [album] liée 
 
   albumLists: List[] = [];
   list: List;
-  songs:Array<string> = [];
-
+  songs: Array<string> = [];// on utilisera ici un tableau de chansons
+  
   @Output() onPlay: EventEmitter<Album> = new EventEmitter();
 
+  constructor(private ablumService: AlbumService) { }
 
-  constructor(private albumService: AlbumService) { }
+  ngOnInit() { }
 
-  ngOnInit() {}
-
-  ngOnChanges(){
-
-    if(this.album){
-    this.list = this.albumService.getAlbumList(this.album.ref);
-    this.songs = this.list.list;
+  // dès que quelque chose "rentre" dans le component enfant via une propriété Input
+  // ou à l'initialisation du component (une fois)
+  ngOnChanges() {
+    // au chargement du component parent on n'a rien sélectionné pensez à vérifier que l'on a passé un album
+    if (this.album) {
+      this.list = this.ablumService.getAlbumList(this.album.ref); // récupération d'un objet List
+      this.songs = this.list.list; // récupération de la liste des chansons.
     }
   }
-
+  
+  play(album: Album) {
+    this.onPlay.emit(album);
+  }
 
 }

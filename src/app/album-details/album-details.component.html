@@ -1,17 +1,14 @@
-
-
-
-<div class="card">
-    <img class="card-img-top" src="https://placekitten.com/32/32" alt="Group Music">
+<div class="card" *ngIf="album">
+    <img *ngIf="album.url" class="card-img-top" src="{{album.url}}" alt="Group Music">
     <div class="card-body">
+        <h5 class="card-title">{{ album.title }}</h5>
+        <p class="card-text">Name: {{ album.name }}</p>
 
-        <h5 class="card-title" *ngIf="album">Nom de l'album : {{album.title}}</h5>
-        <p class="card-text" *ngIf="album">Nom de l'artiste: {{album.name}}</p>
-        <a class="btn btn-primary" (click)="play(album)">Play >> </a>
-        
-        <ul class="list-group" *ngIf="albumSongs">
-            <li class="list-group-item" *ngFor="let song of albumSongs.list">{{song}}</li>
-        </ul>
+        <a (click)="play(album)" class="btn btn-primary">Play >> </a>
 
     </div>
-    </div>
+    <ul class="list-group" *ngIf="list">
+        <h2>Playlist</h2>
+        <li *ngFor="let song of songs " class="list-group-item">{{song }}</li>
+    </ul>
+</div>

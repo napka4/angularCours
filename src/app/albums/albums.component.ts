@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Album } from '../album';
 import { AlbumService } from '../album.service';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-albums',
@@ -10,32 +11,47 @@ import { AlbumService } from '../album.service';
 })
 export class AlbumsComponent implements OnInit {
 
-  titlePage: string = "Page Principale Albums Music";
+  titlePage: string = "Page princiaple Albums Music";
   albums: Album[] = [];
-  albumSelected : Album;
-  status: string = null; 
+  selectedAlbum: Album;
+  status: string = null; // définir 
 
-  constructor(private albumService: AlbumService) {}
+  constructor(private ablumService: AlbumService) { }
 
-/*   playParent($event) {
-    console.log(event);
-    this.status = $event.ref;
-  } */
   ngOnInit() {
-    //this.albums = this.albumService.getAlbums();
-    this.albums = this.albumService.order((a,b) => { return b.duration - a.duration}).limit(0,3).getAlbums();
+    // this.albums = this.ablumService.getAlbums();
+
+    // ordonner le album par rapport à la durée
+    // this.albums = this.ablumService.order((a, b) => {
+    //   return a.duration - b.duration
+    // }).limit(0, 2).getAlbums();
+
+    // localCompare permet de trier un tableau de chaîne de caractères sans se soucier de la casse
+    this.albums = this.ablumService
+      .order(
+        (a, b) => a.title.localeCompare(b.title)
+      )
+      .paginate(0,2); // ne modifie pas le tableau d'albums
   }
 
-  onSelected(album:Album) {
+  onSelect(album: Album) {
     //console.log(album);
-    this.albumSelected = album;
+    this.selectedAlbum = album;
   }
 
   playParent($event) {
+    console.log($event);
     this.status = $event.ref;
   }
 
-  mySearch($event) {
-   if ($event) this.albums = $event;
+  search($event) {
+    // vous pouvez également appliquer de l'ordre dans le résultat.
+    if ($event) this.albums = $event;
   }
+
+  paginate($event) {
+    // console.log($event);
+    this.albums = this.ablumService.paginate($event.start,$event.end);
+  }
+
 }

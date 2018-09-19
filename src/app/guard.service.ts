@@ -14,13 +14,13 @@ export class GuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
+    // vérifier en mémoire que la personne est bien authentifiée ~ memoriser son statut en gardant son nom
     if (this.aS.isAuth)
       return true;
 
-    this.router.navigate(['/login'], { queryParams: { messageError: `Error` } });
+    this.router.navigate(['/login'], { queryParams: { messageError: `Error authentification` } });
 
     return false;
-
   }
 
   // méthode pour se déloguer
@@ -30,6 +30,7 @@ export class GuardService implements CanActivate {
     this.router.navigate(['/albums'], { queryParams: { message: `Success logout` } });
   }
 
+  // savoir si on est 
   isLoggedIn() { return this.aS.isAuth.length > 0; }
 
 }

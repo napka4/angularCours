@@ -1,6 +1,10 @@
-.card-special{
-    background-color: rgba(168, 166, 190, 0.712);
+.card-selected .btn-dark{
+    cursor: pointer;
 }
-.index{
-    background-color: rgb(169, 155, 182);
-}
+.card-odd{
+    background-color: #c9c1c1d2;
+}   
+
+.card-even{
+    background-color: #ddc3c3d2;
+}   

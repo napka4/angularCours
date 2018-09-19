@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlbumService } from '../album.service';
 import { Album } from '../album';
 
@@ -10,9 +10,9 @@ import { Album } from '../album';
 })
 export class AlbumDescriptionComponent implements OnInit {
 
-  album: Album ;
+  album : Album ;
 
-  constructor(private route: ActivatedRoute, private aS: AlbumService) { }
+  constructor(private route: ActivatedRoute, private aS: AlbumService, private router : Router) { }
 
   ngOnInit() {
     const ref = this.route.snapshot.paramMap.get('ref');

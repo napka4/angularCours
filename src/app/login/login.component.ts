@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(form: NgForm): void {
-    const name = this.authS.auth(form.value['email'], form.value['password']);
-    if (name) {
-      this.router.navigate(['/dashboard'], {queryParams : {message : 'Success'}});
+
+    if (this.authS.auth(form.value['email'], form.value['password']) === true) {
+      this.router.navigate(['/dashboard'], {queryParams : {message : 'Success'}}); 
     } else {
       this.messageError = 'error Login or password ';
     }
