@@ -11,7 +11,7 @@ import { $ } from 'protractor';
 })
 export class AlbumsComponent implements OnInit {
 
-  titlePage: string = "Page princiaple Albums Music";
+  titlePage: string = "Page principale Albums Music";
   albums: Album[] = [];
   selectedAlbum: Album;
   status: string = null; // définir 

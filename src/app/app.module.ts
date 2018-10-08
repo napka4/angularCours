@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginateComponent } from './paginate/paginate.component';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PaginateComponent } from './paginate/paginate.component';
     DashboardComponent,
     PageNotFoundComponent,
     PaginateComponent,
+    AudioPlayerComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,8 @@ export class Album {
     duration: number;
     url?: string;
     like?: string;
-    tags?: Array<string>
+    tags?: Array<string>;
+    status? : string
 }
 
 export class List {

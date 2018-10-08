@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+    background-color: rgb(163, 147, 206);
+    color: white;
+}
 .principal{
     height: 8rem;
     margin: 0 4.5rem;
@@ -20,3 +24,9 @@
    height: .75rem;
    display: inline-block; margin:0.25rem;
 }
+
+.container-fuild {
+    background-color: rgb(163, 147, 206);
+    color: white;
+}
+
