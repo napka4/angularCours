@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Album, List, CallableAlbum } from './album';
 import { ALBUM_LISTS, ALBUMS } from './mock-albums';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,12 @@ export class AlbumService {
 
   private _albums: Album[] = ALBUMS;
   private _albumList: List[] = ALBUM_LISTS;
-  private _count : number = 0;
+  private _count: number = 0;
 
-  sendCurrentNumberPage = new Subject<number>(); // pour mettre à jour la pagination 
+  sendCurrentNumberPage = new Subject<number>(); // pour mettre à jour la pagination
+  subjectAlbum = new Subject<Album>(); // pour émettre des informations de l'écoute d'un Album
 
-  constructor() { this._count = ALBUMS.length; }
+  constructor(private http : HttpClient) { this._count = ALBUMS.length; }
 
   getAlbums(): Album[] {
 
@@ -65,5 +67,32 @@ export class AlbumService {
   }
 
   // retourne le nombre d'albums 
-  count():number{ return this._count;}
+  count(): number { return this._count; }
+
+  emitAlbumSubject(album : Album){
+    this.subjectAlbum.next(album); // Le Subject est également un Observer
+  }
+
+  // Audio-player 
+  switchOn(album: Album) {
+
+    this._albums.forEach(
+      a => {
+        if (a.ref === album.ref) album.status = 'on';
+        else
+          a.status = 'off';
+      }
+    );
+
+    this.subjectAlbum.next(album); // Observer puscher les informations
+  }
+
+  // Cette méthode n'a pas besoin d'émettre une information à l'Observable
+  switchOff(album: Album) {
+    this._albums.forEach(
+      a => {
+        a.status = 'off';
+      }
+    );
+  }
 }

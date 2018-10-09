@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Album } from '../album';
 import { AlbumService } from '../album.service';
-import { $ } from 'protractor';
 
 @Component({
   selector: 'app-albums',
@@ -11,10 +10,9 @@ import { $ } from 'protractor';
 })
 export class AlbumsComponent implements OnInit {
 
-  titlePage: string = "Page principale Albums Music";
+  titlePage: string = "Page princiaple Albums Music";
   albums: Album[] = [];
   selectedAlbum: Album;
-  status: string = null; // définir 
 
   constructor(private ablumService: AlbumService) { }
 
@@ -31,17 +29,15 @@ export class AlbumsComponent implements OnInit {
       .order(
         (a, b) => a.title.localeCompare(b.title)
       )
-      .paginate(0,2); // ne modifie pas le tableau d'albums
+      .paginate(0, 2); // ne modifie pas le tableau d'albums
   }
 
   onSelect(album: Album) {
-    //console.log(album);
     this.selectedAlbum = album;
   }
 
   playParent($event) {
-    console.log($event);
-    this.status = $event.ref;
+    this.ablumService.switchOn($event);
   }
 
   search($event) {
@@ -50,8 +46,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   paginate($event) {
-    // console.log($event);
-    this.albums = this.ablumService.paginate($event.start,$event.end);
+    this.albums = this.ablumService.paginate($event.start, $event.end);
   }
 
 }
